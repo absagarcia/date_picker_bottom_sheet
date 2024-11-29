@@ -1,4 +1,4 @@
-name: date_picker_textfield_example
+name: date_picker_bottom_sheet_example
 description: Example project demonstrating the use of date_picker_textfield.
 publish_to: "none" # Evita publicar esta parte del ejemplo como paquete.
 environment:
@@ -6,5 +6,5 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  date_picker_textfield:
+  date_picker_bottom_sheet:
     path: ../ # Usa el paquete localmente durante el desarrollo.

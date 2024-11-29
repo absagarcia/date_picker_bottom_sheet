@@ -1,4 +1,6 @@
-import 'package:date_picker_textfield/date_picker_bottom_sheet.dart';
+import 'dart:developer';
+
+import 'package:date_picker_bottom_sheet/date_picker_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
@@ -20,7 +22,7 @@ class MyApp extends StatelessWidget {
               }
               return null;
             },
-            onChanged: (value) => print('Selected date: $value'),
+            onChanged: (value) => log('Selected date: $value'),
           ),
         ),
       ),
