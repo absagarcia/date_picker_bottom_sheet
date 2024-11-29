@@ -75,7 +75,10 @@ Submit a pull request
 Support Me
 If you find this project helpful, consider buying me a coffee!
 
-[![Buy Me a Coffee](https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=eliecerabsalongarcia&button_colour=5F7FFF&font_colour=ffffff&font_family=Poppins&outline_colour=000000&coffee_colour=FFDD00)](https://www.buymeacoffee.com/eliecerabsalongarcia)
+<a href="https://www.buymeacoffee.com/eliecerabsalongarcia" target="_blank">
+    <img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174">
+</a>
+
 License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
