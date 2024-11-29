@@ -3,14 +3,14 @@ library date_picker_textfield;
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-/// A customizable `DatePickerTextField` widget that combines a `TextFormField`
+/// A customizable `DatePickerBottomSheet` widget that combines a `TextFormField`
 /// with a date picker for user-friendly date input.
 ///
 /// It supports external controllers, validators, and change listeners.
 ///
 /// Example usage:
 /// ```dart
-/// DatePickerTextField(
+/// DatePickerBottomSheet(
 ///   controller: myController,
 ///   validator: (value) {
 ///     if (value == null || value.isEmpty) {
@@ -21,7 +21,7 @@ import 'package:intl/intl.dart';
 ///   onChanged: (value) => print('Selected date: $value'),
 /// )
 /// ```
-class DatePickerTextField extends StatefulWidget {
+class DatePickerBottomSheet extends StatefulWidget {
   final TextEditingController? controller;
   final FormFieldValidator<String>? validator;
   final ValueChanged<String>? onChanged;
@@ -39,7 +39,7 @@ class DatePickerTextField extends StatefulWidget {
   final String? bottomSheetText;
   final bool Function(DateTime date)? selectableDayPredicate;
 
-  const DatePickerTextField({
+  const DatePickerBottomSheet({
     super.key,
     this.controller,
     this.validator,
@@ -60,10 +60,10 @@ class DatePickerTextField extends StatefulWidget {
   });
 
   @override
-  State<DatePickerTextField> createState() => _DatePickerTextFieldState();
+  State<DatePickerBottomSheet> createState() => _DatePickerBottomSheetState();
 }
 
-class _DatePickerTextFieldState extends State<DatePickerTextField> {
+class _DatePickerBottomSheetState extends State<DatePickerBottomSheet> {
   late TextEditingController _internalController;
 
   @override

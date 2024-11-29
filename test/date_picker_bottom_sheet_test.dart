@@ -1,21 +1,21 @@
+import 'package:date_picker_bottom_sheet/date_picker_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:date_picker_textfield/date_picker_textfield.dart';
 import 'package:intl/intl.dart';
 
 void main() {
-  group('DatePickerTextField Tests', () {
+  group('DatePickerBottomSheet() Tests', () {
     testWidgets('renders correctly with default properties', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: DatePickerTextField(),
+            body: DatePickerBottomSheet(),
           ),
         ),
       );
 
       // Verify the widget renders correctly
-      expect(find.byType(DatePickerTextField), findsOneWidget);
+      expect(find.byType(DatePickerBottomSheet), findsOneWidget);
       expect(find.text('Selecciona una fecha'), findsOneWidget);
     });
 
@@ -28,7 +28,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: DatePickerTextField(
+            body: DatePickerBottomSheet(
               controller: controller,
               dateFormat: 'dd-MM-yyyy',
               confirmButtonText: 'OK',
@@ -65,7 +65,7 @@ void main() {
           home: Scaffold(
             body: Form(
               key: key,
-              child: DatePickerTextField(
+              child: DatePickerBottomSheet(
                 validator: validator,
                 confirmButtonText: 'OK',
               ),
@@ -99,7 +99,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: DatePickerTextField(
+            body: DatePickerBottomSheet(
               onChanged: (value) {
                 selectedDate = value;
               },
@@ -128,7 +128,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: DatePickerTextField(
+            body: DatePickerBottomSheet(
               decoration: const InputDecoration(
                 hintText: hintText,
                 labelText: labelText,
@@ -147,7 +147,7 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: DatePickerTextField(
+            body: DatePickerBottomSheet(
               selectableFutureOnly: false,
             ),
           ),
