@@ -120,7 +120,7 @@ class _DatePickerBottomSheetState extends State<DatePickerBottomSheet> {
                   initialDate: initialDate,
                   firstDate: widget.firstDate ?? DateTime.now(),
                   lastDate: widget.lastDate ??
-                      DateTime.now().add(Duration(days: 365 * 5)),
+                      DateTime.now().add(const Duration(days: 365 * 5)),
                   onDateChanged: (date) => selectedDate = date,
                   selectableDayPredicate: widget.selectableDayPredicate ??
                       (date) => widget.selectableFutureOnly

@@ -7,7 +7,7 @@ void main() {
   group('DatePickerBottomSheet() Tests', () {
     testWidgets('renders correctly with default properties', (tester) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Scaffold(
             body: DatePickerBottomSheet(),
           ),
@@ -126,10 +126,10 @@ void main() {
       const labelText = 'Custom label';
 
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Scaffold(
             body: DatePickerBottomSheet(
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 hintText: hintText,
                 labelText: labelText,
               ),
@@ -145,7 +145,7 @@ void main() {
 
     testWidgets('respects selectableFutureOnly = false', (tester) async {
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Scaffold(
             body: DatePickerBottomSheet(
               selectableFutureOnly: false,
