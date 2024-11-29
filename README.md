@@ -11,9 +11,9 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/to/develop-packages).
 -->
 
-# DatePickerTextField
+# DatePickerBottomSheet
 
-`DatePickerTextField` is a customizable widget that combines a `TextFormField` with a date picker, providing a user-friendly date input experience.
+`DatePickerBottomSheet` is a customizable widget that combines a `TextFormField` with a date picker, providing a user-friendly date input experience.
 
 ## Features
 
@@ -35,10 +35,10 @@ dependencies:
 
 ## Usage
 
-Here’s an example of how to use the DatePickerTextField widget in your project:
+Here’s an example of how to use the DatePickerBottomSheet widget in your project:
 
 ```dart
-DatePickerTextField(
+DatePickerBottomSheet(
 controller: myController,
 validator: (value) {
 if (value == null || value.isEmpty) {
