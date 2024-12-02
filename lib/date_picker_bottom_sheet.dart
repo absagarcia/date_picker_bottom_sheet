@@ -3,42 +3,102 @@ library date_picker_textfield;
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-/// A customizable `DatePickerBottomSheet` widget that combines a `TextFormField`
-/// with a date picker for user-friendly date input.
+/// A customizable widget for selecting dates through a bottom sheet.
 ///
-/// It supports external controllers, validators, and change listeners.
+/// Combines a `TextFormField` with a calendar date picker for user-friendly
+/// date input. Supports external controllers, validation, and various
+/// customizations for appearance and functionality.
 ///
 /// Example usage:
 /// ```dart
 /// DatePickerBottomSheet(
 ///   controller: myController,
-///   validator: (value) {
-///     if (value == null || value.isEmpty) {
-///       return 'Please select a date';
-///     }
-///     return null;
-///   },
-///   onChanged: (value) => print('Selected date: $value'),
+///   validator: (value) => value?.isEmpty == true ? 'Select a date' : null,
+///   onChanged: (value) => print('Date selected: $value'),
 /// )
 /// ```
 class DatePickerBottomSheet extends StatefulWidget {
+  /// Controller for managing the text field content.
+  ///
+  /// If not provided, an internal controller will be used.
   final TextEditingController? controller;
+
+  /// Validator function for the text field.
+  ///
+  /// Can be used to ensure that the selected date meets specific requirements.
   final FormFieldValidator<String>? validator;
+
+  /// Callback triggered when the date changes.
+  ///
+  /// Provides the formatted date string as its parameter.
   final ValueChanged<String>? onChanged;
+
+  /// Decoration for the `TextFormField`.
+  ///
+  /// Overrides [labelText], [hintText], and [suffixIcon] if provided.
   final InputDecoration? decoration;
+
+  /// Label text displayed within the `TextFormField`.
+  ///
+  /// Ignored if [decoration] is provided.
   final String? labelText;
+
+  /// Hint text displayed within the `TextFormField`.
+  ///
+  /// Defaults to the provided date format.
   final String? hintText;
+
+  /// Format for displaying and parsing dates.
+  ///
+  /// Defaults to `'dd-MM-yyyy'`.
   final String dateFormat;
+
+  /// The earliest selectable date.
+  ///
+  /// Defaults to the current date if not provided.
   final DateTime? firstDate;
+
+  /// The latest selectable date.
+  ///
+  /// Defaults to five years from the current date if not provided.
   final DateTime? lastDate;
+
+  /// Icon displayed at the end of the `TextFormField`.
+  ///
+  /// Defaults to a calendar icon with a tap handler to open the bottom sheet.
   final Widget? suffixIcon;
+
+  /// Text style for the `TextFormField`.
+  ///
+  /// Applies to the displayed date and placeholder text.
   final TextStyle? style;
+
+  /// Whether only future dates can be selected.
+  ///
+  /// Defaults to `true`.
   final bool selectableFutureOnly;
+
+  /// Text for the confirmation button in the bottom sheet.
+  ///
+  /// Defaults to `'Aceptar'`.
   final String confirmButtonText;
+
+  /// Text for the cancel button in the bottom sheet.
+  ///
+  /// Defaults to `'Cancelar'`.
   final String cancelButtonText;
+
+  /// Text displayed at the top of the bottom sheet.
+  ///
+  /// Provides context to the user about the current selection task.
   final String? bottomSheetText;
+
+  /// Predicate to determine which days are selectable.
+  ///
+  /// Defaults to allowing all future days if [selectableFutureOnly] is `true`.
   final bool Function(DateTime date)? selectableDayPredicate;
 
+  /// Creates a `DatePickerBottomSheet` with customizable properties.
   const DatePickerBottomSheet({
     super.key,
     this.controller,
@@ -63,6 +123,9 @@ class DatePickerBottomSheet extends StatefulWidget {
   State<DatePickerBottomSheet> createState() => _DatePickerBottomSheetState();
 }
 
+/// Internal state for `DatePickerBottomSheet`.
+///
+/// Manages the lifecycle of the text controller and handles date selection.
 class _DatePickerBottomSheetState extends State<DatePickerBottomSheet> {
   late TextEditingController _internalController;
 
@@ -80,6 +143,7 @@ class _DatePickerBottomSheetState extends State<DatePickerBottomSheet> {
     super.dispose();
   }
 
+  /// Opens the bottom sheet to select a date.
   Future<void> _selectDate(BuildContext context) async {
     DateTime now = DateTime.now();
     DateTime initialDate = now;
@@ -89,7 +153,7 @@ class _DatePickerBottomSheetState extends State<DatePickerBottomSheet> {
         initialDate =
             DateFormat(widget.dateFormat).parse(_internalController.text);
       } catch (e) {
-        // Handle invalid date format
+        // Invalid date format, fallback to current date
       }
     }
 
@@ -105,34 +169,34 @@ class _DatePickerBottomSheetState extends State<DatePickerBottomSheet> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    widget.bottomSheetText!,
+                    widget.bottomSheetText ?? '',
                     style: const TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.bold),
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   IconButton(
                     onPressed: () => Navigator.pop(context),
-                    icon: const Icon(Icons.close, size: 24),
+                    icon: const Icon(Icons.close),
                   ),
                 ],
               ),
               Expanded(
                 child: CalendarDatePicker(
                   initialDate: initialDate,
-                  firstDate: widget.firstDate ?? DateTime.now(),
-                  lastDate: widget.lastDate ??
-                      DateTime.now().add(const Duration(days: 365 * 5)),
+                  firstDate: widget.firstDate ?? now,
+                  lastDate:
+                      widget.lastDate ?? now.add(const Duration(days: 1825)),
                   onDateChanged: (date) => selectedDate = date,
                   selectableDayPredicate: widget.selectableDayPredicate ??
                       (date) => widget.selectableFutureOnly
-                          ? date.isAfter(
-                              DateTime.now().subtract(const Duration(days: 1)))
+                          ? date.isAfter(now.subtract(const Duration(days: 1)))
                           : true,
                 ),
               ),
               const SizedBox(height: 10),
               SizedBox(
                 width: double.infinity,
-                height: 50,
                 child: ElevatedButton(
                   onPressed: () {
                     setState(() {
@@ -157,7 +221,7 @@ class _DatePickerBottomSheetState extends State<DatePickerBottomSheet> {
   Widget build(BuildContext context) {
     final decoration = widget.decoration ??
         InputDecoration(
-          labelText: widget.labelText ?? 'Selecciona una fecha',
+          labelText: widget.labelText ?? 'Select a date',
           hintText: widget.hintText ?? widget.dateFormat.toUpperCase(),
           suffixIcon: widget.suffixIcon ??
               IconButton(

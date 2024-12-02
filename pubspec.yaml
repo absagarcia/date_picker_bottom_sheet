@@ -1,6 +1,6 @@
 name: date_picker_bottom_sheet
-description: A customizable TextFormField with a built-in date picker.
-version: 1.0.0
+description: A Flutter package providing a customizable TextFormField with an integrated date picker presented in a bottom sheet, ideal for seamless date selection in forms and applications.
+version: 1.0.1
 homepage: https://github.com/absagarcia/date_picker_textfield
 
 environment:
@@ -9,7 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  intl: ^0.18.0
+  intl: ^0.20.1
 
 dev_dependencies:
   flutter_lints: ^2.0.0
