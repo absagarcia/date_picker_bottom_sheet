@@ -1,0 +1,33 @@
+# Workflow to validate Flutter tests
+name: Flutter CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout repository code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Setup Flutter
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "stable"
+
+      # Install dependencies
+      - name: Install dependencies
+        run: flutter pub get
+
+      # Run tests
+      - name: Run tests
+        run: flutter test
